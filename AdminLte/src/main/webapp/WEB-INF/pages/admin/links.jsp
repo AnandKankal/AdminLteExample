@@ -2,6 +2,8 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.javabykiran.model.Links"%>
 <%@ include file="prevent.jsp" %> 
 <!DOCTYPE html>
 <html>
@@ -103,7 +105,10 @@
             <li class="active">Useful Links</li>
           </ol>
         </section>
-
+<font color="green"> 
+<%
+ 	ArrayList<Links> namesList = (ArrayList<Links>) request.getAttribute("data");
+ %></font>
         <!-- Main content -->
         <section class="content">
           <div class="row">
@@ -122,36 +127,18 @@
                       <th>Content</th>
                       <th>Click</th>
                     </tr>
+        <%
+		int i=0;
+       
+		for (Links name:namesList) {
+			i++;
+          %>          
                     <tr>
-                      <td>01</td>
-                      <td>Schedule</td>
-                      <td><a href="https://www.javabykiran.com/news" target="_blank"><span class="label label-success">Go !</span></a>  </td>
+                      <td><% out.println(name.getId());%></td>
+                      <td><% out.println(name.getContent());%></td>
+                      <td><a href="<% out.println(name.getLink());%>" target="_blank"><span class="label label-success">Go !</span></a>  </td>
                     </tr>
-                    <tr>
-                      <td>02</td>
-                      <td>Video Lactures All Topics</td>
-                      <td><a href="https://www.javabykiran.com/java-by-kiran-videos" target="_blank"><span class="label label-success">Go !</span></a>  </td>
-                    </tr>
-                    <tr>
-                      <td>03</td>
-                      <td>Selenium Interview Questions</td>
-                      <td><a href="https://www.javabykiran.com/selenium-testing-interview-question-answer" target="_blank"><span class="label label-success">Go !</span></a>  </td>
-                    </tr>
-                    <tr>
-                      <td>04</td>
-                      <td>Java Interview Questions</td>
-                      <td><a href="https://www.javabykiran.com/core-java-interview-question-answer" target="_blank"><span class="label label-success">Go !</span></a>  </td>
-                    </tr>
-                    <tr>
-                      <td>05</td>
-                      <td>Courses</td>
-                      <td><a href="https://www.javabykiran.com/courses" target="_blank"><span class="label label-success">Go !</span></a>  </td>
-                    </tr>
-                    <tr>
-                      <td>06</td>
-                      <td>Placement</td>
-                      <td><a href="https://www.javabykiran.com/placement" target="_blank"><span class="label label-success">Go !</span></a>  </td>
-                    </tr>
+                    <%} %>
                   </table>
                 </div><!-- /.box-body -->
               </div><!-- /.box -->

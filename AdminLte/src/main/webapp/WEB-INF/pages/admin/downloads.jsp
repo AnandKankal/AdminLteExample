@@ -2,6 +2,13 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.javabykiran.model.Download"%>
+<%@page import="java.io.*"%>
+<%@page import="java.sql.*"%>
+<%@page import="java.util.Base64"%>
+<%@page import="java.util.regex.Matcher"%>
+<%@page import="java.util.regex.Pattern"%>
 <%@ include file="prevent.jsp" %>    
 <!DOCTYPE html>
 <html>
@@ -112,6 +119,11 @@
             <li class="active">Downloads</li>
           </ol>
         </section>
+        
+              <font color="green"> 
+<%
+ 	ArrayList<Download> namesList = (ArrayList<Download>) request.getAttribute("data");
+ %></font>
 
         <!-- Main content -->
         <section class="content">
@@ -124,6 +136,7 @@
                     
                   </div>
                 </div><!-- /.box-header -->
+                
                 <div class="box-body table-responsive no-padding">
                   <table class="table table-hover">
                     <tr>
@@ -136,117 +149,94 @@
                       <th>Common</th>
                       <th>Official Source<br><small style="color:red">*For prevoius and latest releases</small></th>
                     </tr>
-                    <tr>
-                      <td>01</td>
-                      <td><img src="<spring:url value="/resources/images/jdk.png"/>" alt="JBK Download" style="height: 40px; padding-left: 7px;"></td>  
-                      <td>Java Development Kit <b>(JDK)</b></td>
-                      <td><span class="label label-info">1.8</span></td>
-                      <td><a href="../downloads/jdk-8u45-windows-i586.exe" download>
-                        <span class="label label-success">32bit</span>
-                      </a></td>
-                      <td><a href="../downloads/jdk-8u211-windows-x64.exe" download >
-                        <span class="label label-success">64bit</span>
-                      </a></td>
-                      <td></td>
-                      <td><a href="https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" target="_blank">
-                        <span class="label label-warning">Official Website</span>
-                      </a></td>
-                    </tr>
-                    <tr>
-                      <td>02</td>
-                      <td><img src="<spring:url value="/resources/images/selenium.png"/>" alt="JBK Download" style="height: 40px"></td>  
-                      <td>Selenium Server <b>Standalon</b> Jar </td>
-                      <td><span class="label label-info">2.52.0</span>
-                          <span class="label label-info">3.9.0</span>
-                      </td>
-                      <td></td>
-                      <td></td>
-                      <td><a href="../downloads/selenium-server-standalone-2.52.0.jar" download>
-                        <span class="label label-success">2.52.0</span>
-                        <a href="../downloads/selenium-server-standalone-3.9.0.jar" download>
-                        <span class="label label-success">3.9.0</span>
-                      </a></td>
-                      <td><a href="http://selenium-release.storage.googleapis.com/index.html" target="_blank">
-                        <span class="label label-warning">Official Website</span>
-                      </a></td>
-                    </tr>
-                    <tr>
-                      <td>03</td>
-                      <td><img src="<spring:url value="/resources/images/selenium.png"/>" alt="JBK Download" style="height: 40px"></td>  
-                      <td>Selenium Server <b>Source</b> Jar </td>
-                      <td><span class="label label-info">2.46.0</span></td>
-                      <td></td>
-                      <td></td>
-                      <td><a href="../downloads/selenium-java-2.46.0-srcs.jar" download>
-                        <span class="label label-success">Common</span>
-                      </a></td>
-                      <td><a href="https://seleniumhq.github.io/selenium/docs/api/java/index.html" target="_blank">
-                        <span class="label label-warning">Official Website</span>
-                      </a></td>
-                    </tr>
-                    <tr>
-                      <td>04</td>
-                      <td><img src="<spring:url value="/resources/images/chrome.png"/>" alt="JBK Download" style="height: 40px"></td>  
-                      <td>Google Chrome </td>
-                      <td><span class="label label-info">76.0</span></td>
-                      <td><a href="../downloads/GoogleChromeStandaloneEnterprise.exe" download>
-                        <span class="label label-success">32bit</span>
-                      </a></td>
-                      <td><a href="../downloads/GoogleChromeStandaloneEnterprise64.exe" download>
-                        <span class="label label-success">64bit</span>
-                      </a></td>
-                      <td></td>
-                      <td><a href="https://cloud.google.com/chrome-enterprise/browser/download/" target="_blank">
-                        <span class="label label-warning">Official Website</span>
-                      </a></td>
-                    </tr>  
-                    <tr>
-                      <td>05</td>
-                      <td><img src="<spring:url value="/resources/images/chrome.png"/>" alt="JBK Download" style="height: 40px"></td>  
-                      <td>Google Chrome Driver</td>
-                      <td><span class="label label-info">76.0</span></td>
-                      <td></td>
-                      <td></td>
-                      <td><a href="../downloads/chromedriver.exe" download>
-                        <span class="label label-success">Common</span>
-                      </a></td>
-                      <td><a href="https://chromedriver.chromium.org/downloads" target="_blank">
-                        <span class="label label-warning">Official Website</span>
-                      </a></td>
-                    </tr> 
-                    <tr>
-                      <td>06</td>
-                      <td><img src="<spring:url value="/resources/images/firefox.png"/>" alt="JBK Download" style="height: 40px"></td>  
-                      <td>Mozilla Firefox</td>
-                      <td><span class="label label-info">69.0</span></td>
-                      <td><a href="../downloads/Firefox Setup 69.0b14 32bit.exe" download>
-                        <span class="label label-success">32bit</span>
-                      </a></td>
-                      <td><a href="../downloads/Firefox Setup 69.0b14 64bit.exe" download>
-                        <span class="label label-success">64bit</span>
-                      </a></td>
-                      <td></td>
-                      <td><a href="https://ftp.mozilla.org/pub/firefox/releases/" target="_blank">
-                        <span class="label label-warning">Official Website</span>
-                      </a></td>
-                    </tr>
-                     <tr>
-                      <td>07</td>
-                      <td><img src="<spring:url value="/resources/images/firefox.png"/>" alt="JBK Download" style="height: 40px"></td>  
-                      <td>Gecko Driver for Latest firefox</td>
-                      <td><span class="label label-info">0.24.0</span></td>
-                      <td><a href="../downloads/geckodriver32bit.exe" download>
-                        <span class="label label-success">32bit</span>
-                      </a></td>
-                      <td><a href="../downloads/geckodriver64bit.exe" download>
-                        <span class="label label-success">64bit</span>
-                      </a></td>
-                      <td></td>
-                      <td><a href="https://github.com/mozilla/geckodriver/releases" target="_blank">
-                        <span class="label label-warning">Official Website</span>
-                      </a></td>
-                    </tr>    
+     <%
+		int i=0;
+        String[] arrOfVersion = null;
+        String[] arrOfVersion2 = null;
+		for (Download name:namesList) {
+			i++;
+			byte[]  img = name.getName();
+			String base64Image = Base64.getEncoder().encodeToString(img);
+			
+			 String str = name.getVersion(); 
+			 
+			 String str2 = name.getCommon(); 
+			 
+			 Pattern pattern = Pattern.compile("[a-zA-Z0-9.]*");
+		      Matcher matcher = pattern.matcher(str);
+		      if (!matcher.matches()) {
+		    	  arrOfVersion = str.split(",", 2);
+		      }
+		 
+		      Matcher matcher2 = pattern.matcher(str2);
+		      if (!matcher2.matches()) {
+		    	  arrOfVersion2 = str.split(",", 2);
+		      }
 
+	%>
+                    <tr>
+                      <td><% out.println(name.getId());%></td>
+                      <td><img style="height: 40px;padding-left: 7px;" src="data:image/jpg;base64,<% out.println(base64Image); %>" /></td>
+                        
+                      <td><% out.println(name.getVendor());%></td>
+                      
+                      <% if( arrOfVersion != null && arrOfVersion.length > 0){ %>
+                      <td>
+                      
+                       <span style="margin-right: 3px;" class="label label-info"><% out.println(arrOfVersion[0]);%></span>
+                          <span class="label label-info"><% out.println(arrOfVersion[1]);%></span>
+                       </td>
+                       
+                      <%arrOfVersion=null;}else{ %>
+                      
+                      
+                      <td>
+                       <span class="label label-info"><% out.println(str);%></span>
+                       
+                      </td>
+                      <%} %>
+                      <% if( name.getBit_32().contains("NA") == false ){ %>
+                      <td><a href="../downloads/jdk-8u45-windows-i586.exe" download>
+                        <span class="label label-success"><% out.println(name.getBit_32());%></span>
+                      </a></td>
+                      <%} else {%>
+                      <td></td>
+                      <%} %>
+                      
+                      <% if( name.getBit_64().contains("NA") == false){ %>
+                      <td><a href="../downloads/jdk-8u211-windows-x64.exe" download >
+                        <span class="label label-success"><% out.println(name.getBit_64());%></span>
+                      </a></td>
+                      <%}else{ %>
+                      <td></td>
+                      <%} %>
+                      
+                     
+                      <% if( name.getCommon().contains("NA") == false ){ %>
+                      <% if( arrOfVersion2 != null && arrOfVersion2.length > 0){ %>
+                      <td>
+                      
+                       <span style="margin-right: 3px;" class="label label-success"><% out.println(arrOfVersion2[0]);%></span>
+                          <span class="label label-success"><% out.println(arrOfVersion2[1]);%></span>
+                       </td>
+                       
+                      <%arrOfVersion2=null;}else{ %>
+                      
+                      
+                      <td>
+                       <span class="label label-success"><% out.println(str2);%></span>
+                       
+                      </td>
+                      <%} %>
+                      <%} else{%>
+                      <td></td>
+                      <%} %>
+                      <td><a href="https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" target="_blank">
+                        <span class="label label-warning"><% out.println(name.getOfficialsources());%></span>
+                      </a></td>
+                    </tr>
+                    <%} %>
+                    
                   </table>
                 </div><!-- /.box-body -->
               </div><!-- /.box -->

@@ -2,6 +2,8 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.javabykiran.model.Operators"%>
 <%@ include file="prevent.jsp" %> 
 <!DOCTYPE html>
 <html>
@@ -106,7 +108,10 @@
             <li class="active">Operators</li>
           </ol>
         </section>
-
+<font color="green"> 
+<%
+ 	ArrayList<Operators> namesList = (ArrayList<Operators>) request.getAttribute("data");
+ %></font>
         <!-- Main content -->
         <section class="content">
           <div class="row">
@@ -128,58 +133,35 @@
                       <th>Contact</th>
                       <th>Timings</th>
                     </tr>
+                     <%
+		int i=0;
+       
+		for (Operators name:namesList) {
+			i++;
+          %>    
                     <tr>
-                      <td>01</td>
-                      <td>Kiran</td>
-                      <td>Urgent Technical Help</td>
-                      <td><span class="label label-success">Whats App Only</span></td>
-                      <td>9552343698</td>
-                      <td>07:00 AM to 10:00 PM <b>Monday-Sunday</b></td>
-                    </tr>
-                    <tr>
-                      <td>02</td>
-                      <td>Neelam</td>
-                      <td>Technical Discussion (Errors, Software, Technical Materials)</td>
-                      <td><span class="label label-success">Whats App</span>
-                          <span class="label label-info">Phone Call</span>
+                      <td><% out.println(name.getId());%></td>
+                      <td><% out.println(name.getPerson());%></td>
+                      <td><% out.println(name.getForr());%></td>
+                      <td>
+                      <% if( name.getWhatsapp().equals("true") ){ %>
+                      <span class="label label-success">Whats App Only</span>
+                      <%} %>
+                      <% if( name.getPhonecall().equals("true") ){ %>
+                          <span class="label label-info">Phone</span>
+                          <%} %>
+                          <% if( name.getSms().equals("true") ){ %>
                           <span class="label label-warning">SMS</span>
-                          <span class="label label-danger">eMail</span>
+                          <%} %>
+                          <% if( name.getEmail().equals("true") ){ %>
+                          <span class="label label-danger">Email</span>
+                          <%} %>
                       </td>
-                      <td>7066885937</td>
-                      <td>09:00 AM to 06:00 PM <b>Monday-Saturday</b></td>
+                      <td><% out.println(name.getContact());%></td>
+                      <td><% out.println(name.getTiming());%></td>
                     </tr>
-                    <tr>
-                      <td>03</td>
-                      <td>Seema</td>
-                      <td>Administration (Fees, ID Card, Certificates, WhatsApp Group, Enquiry)</td>
-                      <td><span class="label label-success">Whats App</span>
-                          <span class="label label-info">Phone Call</span>
-                          <span class="label label-warning">SMS</span>
-                          <span class="label label-danger">eMail</span>
-                      </td>
-                      <td>8888558802</td>
-                      <td>09:00 AM to 06:00 PM <b>Monday-Saturday</b></td>
-                    </tr>
-                    <tr>
-                      <td>04</td>
-                      <td>Varsha</td>
-                      <td>Enquiry(Course Details, Fees, Enquiry)</td>
-                      <td><span class="label label-success">Whats App</span>
-                          <span class="label label-info">Phone Call</span>
-                          <span class="label label-warning">SMS</span>
-                          <span class="label label-danger">eMail</span>
-                      </td><td>8888809416</td>
-                      <td>09:00 AM to 06:00 PM <b>Monday to Friday and Sunday</b></td>
-                    </tr>
-                    <tr>
-                      <td>05</td>
-                      <td>Darshit</td>
-                      <td>Technical Help</td>
-                      <td><span class="label label-success">Whats App Only</span></td>
-                      <td>8866888662</td>
-                      <td>08:30 AM to 02:00 PM <b>Saturday-Sunday</b></td>
-                    </tr>
-                   
+                    <%} %>
+                                      
                   </table>
                 </div><!-- /.box-body -->
               </div><!-- /.box -->

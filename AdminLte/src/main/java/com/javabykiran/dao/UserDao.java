@@ -1,5 +1,8 @@
 package com.javabykiran.dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -12,6 +15,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.javabykiran.model.Download;
+import com.javabykiran.model.Links;
+import com.javabykiran.model.Operators;
 import com.javabykiran.model.State;
 import com.javabykiran.model.User;
 import com.javabykiran.model.Users;	
@@ -144,6 +150,30 @@ public class UserDao {
 	{
 		return (State) sessionFactory.openSession().get(
                 State.class, stat_id);
+	}
+	
+	public List<Download> showDownloadList() {
+		List<Download> listusers = (List<Download>) sessionFactory
+		.openSession()
+		.createCriteria(Download.class).list();
+		
+		return listusers;
+	}
+	
+	public List<Links> showLinkList() {
+		List<Links> listusers = (List<Links>) sessionFactory
+		.openSession()
+		.createCriteria(Links.class).list();
+		
+		return listusers;
+	}
+	
+	public List<Operators> showOperators() {
+		List<Operators> listusers = (List<Operators>) sessionFactory
+		.openSession()
+		.createCriteria(Operators.class).list();
+		
+		return listusers;
 	}
 
 }

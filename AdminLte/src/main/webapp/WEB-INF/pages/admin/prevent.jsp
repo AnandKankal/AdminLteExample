@@ -11,5 +11,5 @@
 String username = (String)request.getAttribute("username");
 response.setHeader("Cache-Control","no-cache,must-revalidate,no-store");
 	if(session.getAttribute("username")==null)
-	response.sendRedirect("loginpage");
+	response.sendRedirect(" ");
 %>

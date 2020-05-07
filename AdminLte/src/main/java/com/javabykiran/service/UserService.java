@@ -9,6 +9,9 @@ import org.springframework.stereotype.Service;
 
 import com.javabykiran.dao.LoginDao;
 import com.javabykiran.dao.UserDao;
+import com.javabykiran.model.Download;
+import com.javabykiran.model.Links;
+import com.javabykiran.model.Operators;
 import com.javabykiran.model.State;
 import com.javabykiran.model.User;
 import com.javabykiran.model.Users;
@@ -88,4 +91,17 @@ public class UserService {
 	{
 		return  userDao.getStateById(stat_id);
 	}
+	
+	public ArrayList<Download> showDownloadList() {
+		return (ArrayList<Download>) userDao.showDownloadList();
+	}
+	
+	public ArrayList<Links> showLinkList() {
+		return (ArrayList<Links>) userDao.showLinkList();
+	}
+	
+	public ArrayList<Operators> showOperators() {
+		return (ArrayList<Operators>) userDao.showOperators();
+	}
+	
 }
